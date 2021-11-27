@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -18,7 +19,9 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
-    public static MainManager Instance;
+    public static MainManager Instance { get; private set; }
+
+    public static GameData gameData;
 
     //Make this a singleton that can be accessed from anywhere
     private void Awake()
@@ -29,8 +32,15 @@ public class MainManager : MonoBehaviour
             return;
         }
 
+        DontDestroyOnLoad(this);
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+
+        //!!!SceneManager.sceneLoaded += OnSceneLoaded;
+
+        if (gameData == null)
+        {
+            gameData = new GameData();
+        }
     }
 
     // Start is called before the first frame update
@@ -72,6 +82,8 @@ public class MainManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                Debug.Log("m_GameOver: " + m_GameOver); //!!!!!!!!!!!!!!!
+                //Start();    //!!!!!!!!!!!
             }
         }
     }
@@ -86,5 +98,15 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        UpdateHighScore(m_Points);
+    }
+
+    private void UpdateHighScore(int newScore)
+    {
+        if (newScore > gameData.highScore)
+        {
+            gameData.highScore = newScore;
+        }
+        BestScoreText.text = "Best Score : " + "Name" + " : " + gameData.highScore;
     }
 }
