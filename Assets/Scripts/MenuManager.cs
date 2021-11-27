@@ -10,12 +10,22 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     //!!!!public TextMeshProUGUI UserName;
+    public TMP_Text BestScoreText;
     public TMP_InputField UserInputField;
 
-    //private void Start()
-    //{
-    //    UserInputField.interactable = true; //!!!!
-    //}
+    private void Start()
+    {
+        if (GameManager.gameData != null && BestScoreText != null)
+        {
+            BestScoreText.text = "Best Score: " + GameManager.gameData.highScore;
+        }
+
+        if (GameManager.gameData != null && UserInputField != null)
+        {
+            UserInputField.text = GameManager.gameData.playerName;
+        }
+
+    }
 
     public void StartNew()
     {

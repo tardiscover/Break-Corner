@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
-    public static GameData gameData;
+    public static GameData gameData = new GameData();
 
     //Make this a singleton that can be accessed from anywhere
     private void Awake()
@@ -22,11 +22,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         //!!!SceneManager.sceneLoaded += OnSceneLoaded;
-
-        if (gameData == null)
-        {
-            gameData = new GameData();
-        }
     }
 
     //// Start is called before the first frame update
