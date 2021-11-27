@@ -18,13 +18,7 @@ public static class SaveData
             File.Create(path);
         }
 
-        //!!! better place to check this
-        if (MainManager.gameData == null)
-        {
-            MainManager.gameData = new GameData();
-        }
-
-        string saveFile = JsonUtility.ToJson(MainManager.gameData);
+        string saveFile = JsonUtility.ToJson(GameManager.gameData);
 
         StreamWriter writer = new StreamWriter(path);
         writer.Write(saveFile);

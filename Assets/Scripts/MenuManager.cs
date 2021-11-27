@@ -5,15 +5,25 @@ using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    public static void StartNew()
+    //!!!!public TextMeshProUGUI UserName;
+    public TMP_InputField UserInputField;
+
+    //private void Start()
+    //{
+    //    UserInputField.interactable = true; //!!!!
+    //}
+
+    public void StartNew()
     {
+        GameManager.gameData.playerName = UserInputField.text;
         SceneManager.LoadScene("main");
     }
 
-    public static void StartMenu()
+    public void StartMenu()
     {
         SceneManager.LoadScene("StartMenu");
     }
