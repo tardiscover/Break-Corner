@@ -15,6 +15,11 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.gameData == null || GameManager.gameData.recentPlayerName == null)
+        {
+            SaveData.LoadGameData();
+        }
+
         if (GameManager.gameData != null && BestScoreText != null)
         {
             if (GameManager.gameData.highScorePlayerName != "" && GameManager.gameData.highScore != 0)

@@ -18,20 +18,26 @@ public static class SaveData
             File.Create(path);
         }
 
-        string saveFile = JsonUtility.ToJson(GameManager.gameData);
+        string json = JsonUtility.ToJson(GameManager.gameData);
 
         StreamWriter writer = new StreamWriter(path);
-        writer.Write(saveFile);
+        writer.Write(json);
         writer.Close();
     }
 
-    //public static void LoadGameData()
-    //{
-    //    string path = Application.persistentDataPath + "/" + saveFileName;
+    public static void LoadGameData()
+    {
+        string path = Application.persistentDataPath + "/" + saveFileName;
 
-    //    if (File.Exists(path))
-    //    {
-    //        MainManager.gameData = JsonUtility.FromJson(path, typeof(GameData));
-    //    }
-    //}
+        //Debug.Log(path);    //!!!!!!!!!!!!
+
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            if (json != "")
+            {
+                GameManager.gameData = JsonUtility.FromJson<GameData>(json);
+            }
+        }
+    }
 }
