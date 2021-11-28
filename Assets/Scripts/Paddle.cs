@@ -7,25 +7,29 @@ public class Paddle : MonoBehaviour
     public float Speed = 2.0f;
     public float MaxMovement = 2.0f;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+
+    public virtual void Move()
+    {
         float input = Input.GetAxis("Horizontal");
 
-        Vector3 pos = transform.position;
-        pos.x += input * Speed * Time.deltaTime;
+        if (input != 0)
+        {
+            Debug.Log("right move: " + input);
 
-        if (pos.x > MaxMovement)
-            pos.x = MaxMovement;
-        else if (pos.x < -MaxMovement)
-            pos.x = -MaxMovement;
+            Vector3 pos = transform.position;
+            pos.x += input * Speed * Time.deltaTime;
 
-        transform.position = pos;
+            if (pos.x > MaxMovement)
+                pos.x = MaxMovement;
+            else if (pos.x < -MaxMovement)
+                pos.x = -MaxMovement;
+
+            transform.position = pos;
+        }
     }
 }
