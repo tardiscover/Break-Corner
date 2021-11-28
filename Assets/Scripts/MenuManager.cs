@@ -17,19 +17,26 @@ public class MenuManager : MonoBehaviour
     {
         if (GameManager.gameData != null && BestScoreText != null)
         {
-            BestScoreText.text = "Best Score: " + GameManager.gameData.highScore;
+            if (GameManager.gameData.highScorePlayerName != "" && GameManager.gameData.highScore != 0)
+            {
+                BestScoreText.text = "Best Score : " + GameManager.gameData.highScorePlayerName + " : " + GameManager.gameData.highScore;
+            }
+            else
+            {
+                BestScoreText.text = "Best Score: " + GameManager.gameData.highScore;
+            }
         }
 
         if (GameManager.gameData != null && UserInputField != null)
         {
-            UserInputField.text = GameManager.gameData.playerName;
+            UserInputField.text = GameManager.gameData.recentPlayerName;
         }
 
     }
 
     public void StartNew()
     {
-        GameManager.gameData.playerName = UserInputField.text;
+        GameManager.gameData.recentPlayerName = UserInputField.text;
         SceneManager.LoadScene("main");
     }
 

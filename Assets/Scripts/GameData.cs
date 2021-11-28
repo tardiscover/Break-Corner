@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameData
 {
-    public string playerName;
+    public string recentPlayerName;
+    public string highScorePlayerName;
     public int highScore;
 }

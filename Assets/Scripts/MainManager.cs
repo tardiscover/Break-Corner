@@ -84,13 +84,21 @@ public class MainManager : MonoBehaviour
 
     void UpdateBestScoreText()
     {
-        BestScoreText.text = "Best Score : " + GameManager.gameData.playerName + " : " + GameManager.gameData.highScore;
+        if (GameManager.gameData.highScore == 0)
+        {
+            BestScoreText.text = "Best Score : " + GameManager.gameData.highScore;
+        }
+        else
+        {
+            BestScoreText.text = "Best Score : " + GameManager.gameData.highScorePlayerName + " : " + GameManager.gameData.highScore;
+        }
     }
 
     void UpdateBestScore()
     {
         if (m_Points > GameManager.gameData.highScore)
         {
+            GameManager.gameData.highScorePlayerName = GameManager.gameData.recentPlayerName;
             GameManager.gameData.highScore = m_Points;
             UpdateBestScoreText();
         }
