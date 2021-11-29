@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 346366483}
   - component: {fileID: 346366482}
   m_Layer: 0
-  m_Name: Cube (3)
+  m_Name: Left Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -905,7 +905,7 @@ GameObject:
   - component: {fileID: 850602370}
   - component: {fileID: 850602369}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 1062713876}
   - component: {fileID: 1062713875}
   m_Layer: 0
-  m_Name: Cube (4)
+  m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1313,8 +1313,8 @@ GameObject:
   - component: {fileID: 1288645158}
   - component: {fileID: 1288645157}
   m_Layer: 0
-  m_Name: Cube (1)
-  m_TagString: Untagged
+  m_Name: CornerWall
+  m_TagString: Corner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1327,7 +1327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288645155}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -2.4, y: 2.4, z: 0}
+  m_LocalPosition: {x: -2.6, y: 2.4, z: 0.1}
   m_LocalScale: {x: 0.2, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1550576933}
@@ -1669,7 +1669,7 @@ GameObject:
   - component: {fileID: 1634186527}
   - component: {fileID: 1634186526}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: RightCeiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
