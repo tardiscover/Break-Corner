@@ -19,7 +19,7 @@ public class Paddle : MonoBehaviour
 
         if (input != 0)
         {
-            Debug.Log("right move: " + input);
+            //Debug.Log("right move: " + input);
 
             Vector3 pos = transform.position;
             pos.x += input * Speed * Time.deltaTime;

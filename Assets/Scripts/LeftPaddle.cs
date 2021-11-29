@@ -17,7 +17,7 @@ public class LeftPaddle : Paddle
 
         if (input != 0)
         {
-            Debug.Log("left move: " + input);
+            //Debug.Log("left move: " + input);
 
             Vector3 pos = transform.position;
             pos.z += input * Speed * Time.deltaTime;
