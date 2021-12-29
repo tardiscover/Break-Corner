@@ -23,16 +23,4 @@ public class GameManager : MonoBehaviour
 
         //!!!SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
 }

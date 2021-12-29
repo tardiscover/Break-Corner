@@ -3,15 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FrameWithin
+{
+    Left,
+    Right
+}
+
 public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
+    public FrameWithin frameWithin = FrameWithin.Right;
 
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
     }
-    
+
+    void ToggleFrameWithin()
+    {
+        if (frameWithin == FrameWithin.Right)
+        {
+            frameWithin = FrameWithin.Left;
+        }
+        else
+        {
+            frameWithin = FrameWithin.Right;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Corner"))
+        {
+            ToggleFrameWithin();
+        }
+    }
+
     private void OnCollisionExit(Collision other)
     {
         var velocity = m_Rigidbody.velocity;
@@ -30,6 +57,8 @@ public class Ball : MonoBehaviour
         {
             velocity = velocity.normalized * 3.0f;
         }
+
+        Debug.Log(frameWithin.ToString() + ", " + m_Rigidbody.position.ToString() + ", " + velocity.ToString()); //!!!!!!!!!!!!!!
 
         m_Rigidbody.velocity = velocity;
     }
