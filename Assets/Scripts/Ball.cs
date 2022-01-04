@@ -46,10 +46,25 @@ public class Ball : MonoBehaviour
         //after a collision we accelerate a bit
         velocity += velocity.normalized * 0.01f;
         
-        //check if we are not going totally vertically as this would lead to being stuck, we add a little vertical force
-        if (Vector3.Dot(velocity.normalized, Vector3.up) < 0.1f)
+        //Check if we are going nearly horizontally or nearly vertically, as both are a problem
+        if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) < 0.1f)
         {
+            //Going almost horizontally, so add a little vertical force.
+            Debug.Log("Horiz, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
             velocity += velocity.y > 0 ? Vector3.up * 0.5f : Vector3.down * 0.5f;
+        }
+        else if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) > 0.97f)
+        {
+            //Going almost vertically
+            Debug.Log("Vert, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
+            if (frameWithin == FrameWithin.Right)
+            {
+                velocity += velocity.x > 0 ? Vector3.right * 0.5f : Vector3.left * 0.25f;
+            }
+            else
+            {
+                velocity += velocity.z > 0 ? Vector3.forward * 0.5f : Vector3.back * 0.25f;
+            }
         }
 
         //max velocity
