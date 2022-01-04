@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class LeftPaddle : Paddle
 {
-    private float initialPos;
-
-    private void Start()
-    {
-        initialPos = transform.position.z;
-    }
-
     public override void Move()
     {
         float input = Input.GetAxis("Vertical");
@@ -22,10 +15,11 @@ public class LeftPaddle : Paddle
             Vector3 pos = transform.position;
             pos.z += input * Speed * Time.deltaTime;
 
-            if (pos.z > initialPos + MaxMovement)
-                pos.z = initialPos + MaxMovement;
-            else if (pos.z < initialPos - MaxMovement)
-                pos.z = initialPos - MaxMovement;
+            //Note: signs are reversed since Z axis in opposite diection of game's conceptional z axis.
+            if (pos.z < -MaxPosition)
+                pos.z = -MaxPosition;
+            else if (pos.z > -MinPosition)
+                pos.z = -MinPosition;
 
             transform.position = pos;
         }

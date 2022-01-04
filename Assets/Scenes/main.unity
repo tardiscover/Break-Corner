@@ -342,8 +342,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c141baad4ddf14a98c290342342cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
-  MaxMovement: 2
+  Speed: 5
+  MinPosition: 0.3
+  MaxPosition: 4.5
 --- !u!1 &125738653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,8 +3084,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c9b5f3f2a82554fa5ec788baace903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
-  MaxMovement: 2
+  Speed: 5
+  MinPosition: 0.3
+  MaxPosition: 4.5
 --- !u!54 &2080363954
 Rigidbody:
   m_ObjectHideFlags: 0
