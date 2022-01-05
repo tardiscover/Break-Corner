@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BrickPrefab: {fileID: 897975713663390409, guid: 63f25b9733d2bcd4fa2ff6de1264c739, type: 3}
-  LineCount: 6
+  LineCount: 1
   Ball: {fileID: 177912862}
   ScoreText: {fileID: 188020406}
   BestScoreText: {fileID: 2078529056}
