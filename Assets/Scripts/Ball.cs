@@ -28,6 +28,8 @@ public class Ball : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        //This locks the RigidBody so that it does not move or rotate in the Z axis.
+        //m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
     }
 
     void ToggleFrameWithin()
@@ -39,19 +41,21 @@ public class Ball : MonoBehaviour
         else
         {
             frameWithin = FrameWithin.Right;
-        }
+       }
     }
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Corner"))
         {
+            //Debug.Log("OnCollisionEnter " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
             ToggleFrameWithin();
         }
     }
 
     private void OnCollisionExit(Collision other)
     {
+        //Debug.Log("OnCollisionExit " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
         var velocity = m_Rigidbody.velocity;
         
         //after a collision we accelerate a bit
@@ -84,8 +88,43 @@ public class Ball : MonoBehaviour
             velocity = velocity.normalized * maxVelocity;
         }
 
-        Debug.Log(frameWithin.ToString() + ", " + m_Rigidbody.position.ToString() + ", " + velocity.ToString()); //!!!!!!!!!!!!!!
+        //Debug.Log(frameWithin.ToString() + ", " + m_Rigidbody.position.ToString() + ", " + velocity.ToString()); //!!!!!!!!!!!!!!
 
         m_Rigidbody.velocity = velocity;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Ball OnTriggerEnter");   //!!!!!!!!!
+
+        //About to collide with corner, so unlock constraints
+        m_Rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Ball OnTriggerExit");   //!!!!!!!!!
+
+        if (other.CompareTag("CornerProximityDetector"))
+        {
+            if (frameWithin == FrameWithin.Right)
+            {
+                //This ensures Z is 0 and locks the RigidBody so that it does not move or rotate in the Z axis.
+                if (m_Rigidbody.position.z != 0)
+                {
+                    m_Rigidbody.position = new Vector3(m_Rigidbody.position.x, m_Rigidbody.position.y, 0.0f);
+                }
+                m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+            }
+            else
+            {
+                //This ensures X is 0 and locks the RigidBody so that it does not move or rotate in the X axis.
+                if (m_Rigidbody.position.x != 0)
+                {
+                    m_Rigidbody.position = new Vector3(0.0f, m_Rigidbody.position.y, m_Rigidbody.position.z);
+                }
+                m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
+            }
+        }
     }
 }
