@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Corner
+  - CornerProximityDetector
   layers:
   - Default
   - TransparentFX

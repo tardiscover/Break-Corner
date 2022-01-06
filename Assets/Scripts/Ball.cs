@@ -44,34 +44,25 @@ public class Ball : MonoBehaviour
        }
     }
 
-    private void OnCollisionEnter(Collision other)
+    //Adjust Velocity after a collision
+    void AdjustVelocity()
     {
-        if (other.gameObject.CompareTag("Corner"))
-        {
-            //Debug.Log("OnCollisionEnter " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
-            ToggleFrameWithin();
-        }
-    }
-
-    private void OnCollisionExit(Collision other)
-    {
-        //Debug.Log("OnCollisionExit " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
         var velocity = m_Rigidbody.velocity;
-        
+
         //after a collision we accelerate a bit
         velocity += velocity.normalized * speedIncrease;
-        
+
         //Check if we are going nearly horizontally or nearly vertically, as both are a problem
         if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) < nearHorizontalCutoff)
         {
             //Going almost horizontally, so add a little vertical force.
-            Debug.Log("Horiz, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
+            //Debug.Log("Horiz, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
             velocity += velocity.y > 0 ? Vector3.up * vertVelocityNudge : Vector3.down * vertVelocityNudge;
         }
         else if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) > nearVerticalCutoff)
         {
             //Going almost vertically
-            Debug.Log("Vert, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
+            //Debug.Log("Vert, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
             if (frameWithin == FrameWithin.Right)
             {
                 velocity += velocity.x > 0 ? Vector3.right * horizVelocityNudge : Vector3.left * horizVelocityNudge;
@@ -93,37 +84,79 @@ public class Ball : MonoBehaviour
         m_Rigidbody.velocity = velocity;
     }
 
+    private void RemoveConstraints()
+    {
+        m_Rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    private void ConstrainXTo(float value)
+    {
+        //This ensures X is value passsed and locks the RigidBody so that it does not move on the X axis.
+        //(And allows movement on other axes.)
+        if (m_Rigidbody.position.x != value)
+        {
+            m_Rigidbody.position = new Vector3(value, m_Rigidbody.position.y, m_Rigidbody.position.z);
+        }
+        m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
+    }
+
+    private void ConstrainZTo(float value)
+    {
+        //This ensures Z is value passed and locks the RigidBody so that it does not move on the Z axis.
+        //(And allows movement on other axes.)
+        if (m_Rigidbody.position.z != value)
+        {
+            m_Rigidbody.position = new Vector3(m_Rigidbody.position.x, m_Rigidbody.position.y, value);
+        }
+        m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+    }
+
+    // When ball approaches corner, it should trigger the following events in order.
+    // (
+    //  OnTriggerEnter with CornerProximityDetector
+    //  OnCollisionEnter with Corner
+    //  OnCollisionExit with Corner
+    //  OnTriggerExit with CornerProximityDetector
+    // )
+    // OnCollisionEnter and OnCollisionExit will also happen with borders (walls and ceiling and DeathZone (floors))
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Ball OnTriggerEnter");   //!!!!!!!!!
+        if (other.CompareTag("CornerProximityDetector"))
+        {
+            //About to collide with corner, so unlock constraints
+            RemoveConstraints();
+        }
+    }
 
-        //About to collide with corner, so unlock constraints
-        m_Rigidbody.constraints = RigidbodyConstraints.None;
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Corner"))
+        {
+            ToggleFrameWithin();
+        }
+    }
+
+    //private void OnCollisionExit(Collision other)
+    private void OnCollisionExit()  //Saves some calculations to skip parameter if it won't be used.
+    {
+        //Debug.Log("OnCollisionExit " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
+        AdjustVelocity();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Ball OnTriggerExit");   //!!!!!!!!!
+        //Debug.Log("Ball OnTriggerExit");   //!!!!!!!!!
 
         if (other.CompareTag("CornerProximityDetector"))
         {
             if (frameWithin == FrameWithin.Right)
             {
-                //This ensures Z is 0 and locks the RigidBody so that it does not move or rotate in the Z axis.
-                if (m_Rigidbody.position.z != 0)
-                {
-                    m_Rigidbody.position = new Vector3(m_Rigidbody.position.x, m_Rigidbody.position.y, 0.0f);
-                }
-                m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+                ConstrainZTo(0.0f);
             }
             else
             {
-                //This ensures X is 0 and locks the RigidBody so that it does not move or rotate in the X axis.
-                if (m_Rigidbody.position.x != 0)
-                {
-                    m_Rigidbody.position = new Vector3(0.0f, m_Rigidbody.position.y, m_Rigidbody.position.z);
-                }
-                m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
+                ConstrainXTo(0.0f);
             }
         }
     }
