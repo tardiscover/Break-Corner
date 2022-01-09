@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 158338827}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Exit
+        m_MethodName: QuitButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -862,7 +862,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 158338827}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: StartNew
+        m_MethodName: StartButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
