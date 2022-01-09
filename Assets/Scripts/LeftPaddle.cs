@@ -14,7 +14,6 @@ public class LeftPaddle : Paddle
 
             Vector3 pos = transform.position;
             pos.z += input * Speed * Time.deltaTime;
-
             //Note: signs are reversed since Z axis in opposite diection of game's conceptional z axis.
             if (pos.z < -MaxPosition)
                 pos.z = -MaxPosition;
@@ -23,6 +22,5 @@ public class LeftPaddle : Paddle
 
             transform.position = pos;
         }
-
     }
 }
