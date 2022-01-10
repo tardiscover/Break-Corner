@@ -25,11 +25,17 @@ public class Ball : MonoBehaviour
     private float speedIncrease = 0.01f;
     private float maxVelocity = 3.0f;
 
+    private MainManager mainManager;
+
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+
         //This locks the RigidBody so that it does not move or rotate in the Z axis.
-        //m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
+        ConstrainZTo(0.0f);
+
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+
     }
 
     void ToggleFrameWithin()
@@ -135,6 +141,17 @@ public class Ball : MonoBehaviour
         {
             ToggleFrameWithin();
         }
+        else if (other.gameObject.CompareTag("Paddle"))
+        {
+            if (mainManager.bricksLeft <= 0)
+            {
+                if (mainManager.lineCount < mainManager.maxLineCount)
+                {
+                    mainManager.lineCount++;
+                }
+                mainManager.InitBricks();
+            }
+        }
     }
 
     //private void OnCollisionExit(Collision other)
@@ -146,8 +163,6 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //Debug.Log("Ball OnTriggerExit");   //!!!!!!!!!
-
         if (other.CompareTag("CornerProximityDetector"))
         {
             if (frameWithin == FrameWithin.Right)

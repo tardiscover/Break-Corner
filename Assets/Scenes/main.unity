@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 97436047}
   m_Layer: 0
   m_Name: Paddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -824,12 +824,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d110623a642692246a42fbc2d8d89884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BrickPrefab: {fileID: 897975713663390409, guid: 63f25b9733d2bcd4fa2ff6de1264c739, type: 3}
-  LineCount: 1
-  Ball: {fileID: 177912862}
-  ScoreText: {fileID: 188020406}
-  BestScoreText: {fileID: 2078529056}
+  brickPrefab: {fileID: 897975713663390409, guid: 63f25b9733d2bcd4fa2ff6de1264c739, type: 3}
+  lineCount: 6
+  ball: {fileID: 177912862}
+  scoreText: {fileID: 188020406}
+  bestScoreText: {fileID: 2078529056}
   GameOverText: {fileID: 474497238}
+  bricksLeft: 0
 --- !u!1 &455529321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,7 +2911,7 @@ GameObject:
   - component: {fileID: 2080363953}
   m_Layer: 0
   m_Name: LeftPaddle
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

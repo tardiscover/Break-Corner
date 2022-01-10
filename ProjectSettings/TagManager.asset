@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Corner
   - CornerProximityDetector
+  - Paddle
   layers:
   - Default
   - TransparentFX
