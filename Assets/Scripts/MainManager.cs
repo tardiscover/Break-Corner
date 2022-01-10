@@ -13,8 +13,9 @@ public class MainManager : MonoBehaviour
 
     public Text scoreText;
     public Text bestScoreText;
+    public GameObject StartText;
     public GameObject GameOverText;
-    
+
     public int bricksLeft;
 
     private bool m_Started = false;
@@ -72,6 +73,8 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                StartText.SetActive(false);
+
                 m_Started = true;
                 float randomDirection = Random.Range(-1.0f, 1.0f);
                 Vector3 forceDir = new Vector3(randomDirection, 1, 0);
