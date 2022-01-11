@@ -27,6 +27,15 @@ public class Ball : MonoBehaviour
 
     private MainManager mainManager;
 
+    public AudioClip paddleSound;
+    public AudioClip wallSound;
+    public AudioClip popSound;
+    public AudioClip cornerSound;
+    public AudioClip clearAllSound;
+    //public AudioClip gameOverSound;
+
+    private AudioSource ballAudioSource;
+
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
@@ -35,7 +44,7 @@ public class Ball : MonoBehaviour
         ConstrainZTo(0.0f);
 
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-
+        ballAudioSource = gameObject.GetComponent<AudioSource>();
     }
 
     void ToggleFrameWithin()
@@ -140,6 +149,7 @@ public class Ball : MonoBehaviour
         if (other.gameObject.CompareTag("Corner"))
         {
             ToggleFrameWithin();
+            ballAudioSource.PlayOneShot(cornerSound, 0.75f);
         }
         else if (other.gameObject.CompareTag("Paddle"))
         {
@@ -150,8 +160,26 @@ public class Ball : MonoBehaviour
                     mainManager.lineCount++;
                 }
                 mainManager.InitBricks();
+                ballAudioSource.PlayOneShot(clearAllSound, 1.0f);
+            }
+            else
+            {
+                ballAudioSource.PlayOneShot(paddleSound, 1.0f);
             }
         }
+        else if (other.gameObject.CompareTag("Brick"))
+        {
+            ballAudioSource.PlayOneShot(popSound, 1.0f);
+        }
+        else if (other.gameObject.CompareTag("DeathZone"))
+        {
+            //ballAudio.PlayOneShot(gameOverSound, 1.0f);
+        }
+        else
+        {
+            ballAudioSource.PlayOneShot(wallSound, 1.0f);
+        }
+
     }
 
     //private void OnCollisionExit(Collision other)

@@ -7,6 +7,8 @@ TagManager:
   - Corner
   - CornerProximityDetector
   - Paddle
+  - DeathZone
+  - Brick
   layers:
   - Default
   - TransparentFX

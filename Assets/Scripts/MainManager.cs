@@ -23,10 +23,14 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    public AudioClip gameOverSound;
+    private AudioSource mainAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         lineCount = 1;  //!!!
+        mainAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         UpdateBestScoreText();
         InitBricks();
     }
@@ -104,6 +108,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
         UpdateBestScore();
+        mainAudioSource.PlayOneShot(gameOverSound, 1.0f);
         SaveData.SaveGameData();
     }
 
