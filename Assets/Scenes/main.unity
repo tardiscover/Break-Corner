@@ -691,9 +691,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frameWithin: 1
   paddleSound: {fileID: 8300000, guid: 82620e01d352d0c42860523f16d5c8cf, type: 3}
-  wallSound: {fileID: 8300000, guid: f21b46803fd57f0479f5ada1e77fa88a, type: 3}
-  popSound: {fileID: 8300000, guid: 71268d46cef213a4a9959eb2134bd6cd, type: 3}
-  cornerSound: {fileID: 8300000, guid: f21b46803fd57f0479f5ada1e77fa88a, type: 3}
+  wallSound: {fileID: 8300000, guid: 71268d46cef213a4a9959eb2134bd6cd, type: 3}
+  popSound: {fileID: 8300000, guid: f21b46803fd57f0479f5ada1e77fa88a, type: 3}
+  cornerSound: {fileID: 8300000, guid: 71268d46cef213a4a9959eb2134bd6cd, type: 3}
   clearAllSound: {fileID: 8300000, guid: 0b21c766e41e10a418bd31e5df3712ce, type: 3}
 --- !u!82 &177912864
 AudioSource:
