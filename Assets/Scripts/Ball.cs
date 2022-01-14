@@ -97,9 +97,6 @@ public class Ball : MonoBehaviour
             velocity = velocity.normalized * minVelocity;
         }
 
-
-        //Debug.Log(frameWithin.ToString() + ", " + m_Rigidbody.position.ToString() + ", " + velocity.ToString()); //!!!!!!!!!!!!!!
-
         m_Rigidbody.velocity = velocity;
     }
 
@@ -189,7 +186,6 @@ public class Ball : MonoBehaviour
     //private void OnCollisionExit(Collision other)
     private void OnCollisionExit()  //Saves some calculations to skip parameter if it won't be used.
     {
-        //Debug.Log("OnCollisionExit " + m_Rigidbody.velocity.ToString());   //!!!!!!!!!
         AdjustVelocity();
     }
 

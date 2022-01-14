@@ -9,7 +9,6 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    //!!!!public TextMeshProUGUI UserName;
     public TMP_Text BestScoreText;
     public TMP_InputField UserInputField;
 

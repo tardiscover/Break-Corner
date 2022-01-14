@@ -11,8 +11,6 @@ public static class SaveData
     {
         string path = Application.persistentDataPath + "/" + saveFileName;
 
-        //Debug.Log(path);    //!!!!!!!!!!!!
-
         if (!File.Exists(path))
         {
             File.Create(path);
@@ -28,8 +26,6 @@ public static class SaveData
     public static void LoadGameData()
     {
         string path = Application.persistentDataPath + "/" + saveFileName;
-
-        //Debug.Log(path);    //!!!!!!!!!!!!
 
         if (File.Exists(path))
         {
