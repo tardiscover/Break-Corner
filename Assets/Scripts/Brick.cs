@@ -7,34 +7,40 @@ using UnityEngine.Events;
 public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
-    
-    public int PointValue;
 
-    private MainManager mainManager;
+    private int m_PointValue;
+    public int PointValue
+    {
+        get { return m_PointValue; }
+        set
+        {
+            m_PointValue = m_PointValue < 1 ? 1 : value;
+            var renderer = GetComponentInChildren<Renderer>();
+            MaterialPropertyBlock block = new MaterialPropertyBlock();
+            switch (value)
+            {
+                case 1:
+                    block.SetColor("_Color", Color.green);
+                    break;
+                case 2:
+                    block.SetColor("_Color", Color.yellow);
+                    break;
+                case 5:
+                    block.SetColor("_Color", Color.blue);
+                    break;
+                default:
+                    block.SetColor("_Color", Color.red);
+                    break;
+            }
+            renderer.SetPropertyBlock(block);
+        }
+    }
+
+    protected MainManager mainManager;
 
     void Start()
     {
-        var renderer = GetComponentInChildren<Renderer>();
-
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
-        switch (PointValue)
-        {
-            case 1 :
-                block.SetColor("_Color", Color.green);
-                break;
-            case 2:
-                block.SetColor("_Color", Color.yellow);
-                break;
-            case 5:
-                block.SetColor("_Color", Color.blue);
-                break;
-            default:
-                block.SetColor("_Color", Color.red);
-                break;
-        }
-        renderer.SetPropertyBlock(block);
     }
 
     private void OnCollisionEnter(Collision other)

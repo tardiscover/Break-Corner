@@ -8,17 +8,16 @@ public class MainManager : MonoBehaviour
 {
     public Brick brickPrefab;
     public int rowsOfBricks;
-    private int bricksPerRow = 6;
-
     public readonly int maxRowsOfBricks = 6;
+    private int bricksPerRow = 6;
+    public int bricksLeft;
+
     public Rigidbody ball;
 
     public Text scoreText;
     public Text bestScoreText;
     public GameObject StartText;
     public GameObject GameOverText;
-
-    public int bricksLeft;
 
     private bool m_Started = false;
     private int m_Points;
@@ -31,7 +30,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rowsOfBricks = 1;  //!!!
+        rowsOfBricks = 1;  //First time bricks are initialized, there is 1 row.  This will increase each time they are all eliminated.
 
         mainAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
         UpdateBestScoreText();
