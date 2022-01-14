@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class MainManager : MonoBehaviour
 {
     public Brick brickPrefab;
+    public Brick slidingBrickPrefab;
     public int rowsOfBricks;
     public readonly int maxRowsOfBricks = 6;
     private int bricksPerRow = 6;
-    public int bricksLeft;
+    public int bricksLeft = 0;
 
     public Rigidbody ball;
 
@@ -51,7 +52,14 @@ public class MainManager : MonoBehaviour
             for (int col = 0; col < numCols; ++col)
             {
                 position = parent.transform.TransformPoint((float)col * colOffset, (float)row * rowOffset, 0.0f);
-                brick = Instantiate(brickPrefab, position, parent.rotation, parent);
+                if (col == 0)
+                {
+                    brick = Instantiate(slidingBrickPrefab, position, parent.rotation, parent);
+                }
+                else
+                {
+                    brick = Instantiate(brickPrefab, position, parent.rotation, parent);
+                }
                 bricksLeft++;
 
                 //Assign points based on array, or use last in array if array not long enough

@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - DeathZone
   - Brick
+  - Ball
   layers:
   - Default
   - TransparentFX

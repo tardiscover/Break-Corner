@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 177912864}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1039,13 +1039,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brickPrefab: {fileID: 897975713663390409, guid: 63f25b9733d2bcd4fa2ff6de1264c739, type: 3}
-  lineCount: 6
+  slidingBrickPrefab: {fileID: 2036819624525041570, guid: 0e8cd0a1e0d25134180a751adea64b7e, type: 3}
+  rowsOfBricks: 0
+  bricksLeft: 0
   ball: {fileID: 177912862}
   scoreText: {fileID: 188020406}
   bestScoreText: {fileID: 2078529056}
   StartText: {fileID: 25616727}
   GameOverText: {fileID: 474497238}
-  bricksLeft: 0
   gameOverSound: {fileID: 8300000, guid: e4a6c02fd0395724cb752c5e72bb1c10, type: 3}
 --- !u!1 &455529321
 GameObject:
