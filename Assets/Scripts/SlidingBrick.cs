@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlidingBrick : Brick
 {
     Rigidbody m_Rigidbody;
-    private float speed = 2f;
+    private float speed = 1.0f;
 
     //This sets the desired velocity, and when getting remembers what the last set desired velocity was 
     //(even if the actual velocity changed because of collision, etc.)
@@ -31,13 +31,25 @@ public class SlidingBrick : Brick
         //Fetch the Rigidbody from the GameObject with this script attached
         m_Rigidbody = GetComponent<Rigidbody>();
 
-        DesiredVelocity = gameObject.transform.TransformVector(Vector3.right) * speed;
+        //Initialize Constraints and speed
+        Vector3 initialDirection = gameObject.transform.TransformVector(Vector3.right).normalized;
+        if (initialDirection == Vector3.right)
+        {
+            m_Rigidbody.constraints = m_Rigidbody.constraints | RigidbodyConstraints.FreezePositionZ;
+        }
+        else
+        {
+            m_Rigidbody.constraints = m_Rigidbody.constraints | RigidbodyConstraints.FreezePositionX;
+        }
+
+        DesiredVelocity = initialDirection * speed;
     }
 
     protected override void OnCollisionEnter(Collision other)
     {
         base.OnCollisionEnter(other);
 
+        //If collides with something other than the ball, reverse velocity.
         if (other.gameObject.CompareTag("Ball") == false)
         {
             DesiredVelocity = -m_DesiredVelocity;

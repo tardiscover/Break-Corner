@@ -46,13 +46,18 @@ public class MainManager : MonoBehaviour
         float colOffset = 0.6f;
         Vector3 position;
         Brick brick;
+        int slidingBrickCol;
 
         for (int row = 0; row < numRows; ++row)
         {
+            //For each row, pick a random column to be sliding
+            slidingBrickCol = Random.Range(0, arrayLength - 1);
+
             for (int col = 0; col < numCols; ++col)
             {
                 position = parent.transform.TransformPoint((float)col * colOffset, (float)row * rowOffset, 0.0f);
-                if (col == 0)
+                if (col == slidingBrickCol)
+                //if (col == 0)
                 {
                     brick = Instantiate(slidingBrickPrefab, position, parent.rotation, parent);
                 }
@@ -71,7 +76,7 @@ public class MainManager : MonoBehaviour
 
     public void InitBricks()
     {
-        bricksLeft = 0;     //!!!
+        bricksLeft = 0;
 
         CreateBrickWall(rowsOfBricks, bricksPerRow, GameObject.Find("RightBrickWall").transform);
 
