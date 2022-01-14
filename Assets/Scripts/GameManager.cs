@@ -20,7 +20,5 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
         Instance = this;
-
-        //!!!SceneManager.sceneLoaded += OnSceneLoaded;
     }
 }

@@ -191,6 +191,7 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // ABSTRACTION
         if (other.CompareTag("CornerProximityDetector"))
         {
             if (frameWithin == FrameWithin.Right)

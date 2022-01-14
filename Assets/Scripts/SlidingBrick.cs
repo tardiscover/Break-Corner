@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlidingBrick : Brick
+public class SlidingBrick : Brick   // INHERITANCE
 {
     Rigidbody m_Rigidbody;
     private float speed = 1.0f;
@@ -10,7 +10,7 @@ public class SlidingBrick : Brick
     //This sets the desired velocity, and when getting remembers what the last set desired velocity was 
     //(even if the actual velocity changed because of collision, etc.)
     private Vector3 m_DesiredVelocity;
-    private Vector3 DesiredVelocity
+    private Vector3 DesiredVelocity     // ENCAPSULATION
     {
         get
         {
@@ -24,7 +24,7 @@ public class SlidingBrick : Brick
     }
 
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void Start()     // POLYMORPHISM
     {
         base.Start();
 
@@ -45,7 +45,7 @@ public class SlidingBrick : Brick
         DesiredVelocity = initialDirection * speed;
     }
 
-    protected override void OnCollisionEnter(Collision other)
+    protected override void OnCollisionEnter(Collision other)   // POLYMORPHISM
     {
         base.OnCollisionEnter(other);
 

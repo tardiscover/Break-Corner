@@ -8,8 +8,9 @@ public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
 
+    //The value the brick is worth if hit by the ball.  Color is changed to incate value.
     private int m_PointValue;
-    public int PointValue
+    public int PointValue   // ENCAPSULATION
     {
         get { return m_PointValue; }
         set

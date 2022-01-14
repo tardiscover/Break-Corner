@@ -78,6 +78,7 @@ public class MainManager : MonoBehaviour
     {
         bricksLeft = 0;
 
+        // ABSTRACTION
         CreateBrickWall(rowsOfBricks, bricksPerRow, GameObject.Find("RightBrickWall").transform);
 
         CreateBrickWall(rowsOfBricks, bricksPerRow, GameObject.Find("LeftBrickWall").transform);
@@ -115,6 +116,7 @@ public class MainManager : MonoBehaviour
         scoreText.text = $"Score : {m_Points}";
     }
 
+    // ABSTRACTION
     public void GameOver()
     {
         m_GameOver = true;

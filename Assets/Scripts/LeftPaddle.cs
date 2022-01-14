@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeftPaddle : Paddle
+public class LeftPaddle : Paddle    // INHERITANCE
 {
-    public override void Move()
+    public override void Move()     // POLYMORPHISM
     {
         float input = Input.GetAxis("Vertical");
 
