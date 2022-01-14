@@ -155,9 +155,9 @@ public class Ball : MonoBehaviour
         {
             if (mainManager.bricksLeft <= 0)
             {
-                if (mainManager.lineCount < mainManager.maxLineCount)
+                if (mainManager.rowsOfBricks < mainManager.maxRowsOfBricks)
                 {
-                    mainManager.lineCount++;
+                    mainManager.rowsOfBricks++;
                 }
                 mainManager.InitBricks();
                 ballAudioSource.PlayOneShot(clearAllSound, 1.0f);
