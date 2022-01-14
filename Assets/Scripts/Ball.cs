@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour
     private float nearHorizontalCutoff = 0.1f;
 
     private float speedIncrease = 0.01f;
+    private float minVelocity = 1.0f;
     private float maxVelocity = 3.0f;
 
     private MainManager mainManager;
@@ -71,28 +72,31 @@ public class Ball : MonoBehaviour
         if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) < nearHorizontalCutoff)
         {
             //Going almost horizontally, so add a little vertical force.
-            //Debug.Log("Horiz, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
             velocity += velocity.y > 0 ? Vector3.up * vertVelocityNudge : Vector3.down * vertVelocityNudge;
         }
         else if (Mathf.Abs(Vector3.Dot(velocity.normalized, Vector3.up)) > nearVerticalCutoff)
         {
             //Going almost vertically
-            //Debug.Log("Vert, velocity.normalized=" + velocity.normalized.ToString() + ", Vector3.up=" + Vector3.up.ToString() + ", product=" + Vector3.Dot(velocity.normalized, Vector3.up).ToString()); //!!!!!!!!!!!!!!
             if (frameWithin == FrameWithin.Right)
             {
                 velocity += velocity.x > 0 ? Vector3.right * horizVelocityNudge : Vector3.left * horizVelocityNudge;
             }
             else
             {
-                velocity += velocity.z > 0 ? Vector3.back * horizVelocityNudge : Vector3.forward * horizVelocityNudge;
+                velocity += velocity.z > 0 ? Vector3.forward * horizVelocityNudge : Vector3.back * horizVelocityNudge;
             }
         }
 
-        //max velocity
+        //restrict to max and min velocity
         if (velocity.magnitude > maxVelocity)
         {
             velocity = velocity.normalized * maxVelocity;
         }
+        else if (velocity.magnitude < minVelocity)
+        {
+            velocity = velocity.normalized * minVelocity;
+        }
+
 
         //Debug.Log(frameWithin.ToString() + ", " + m_Rigidbody.position.ToString() + ", " + velocity.ToString()); //!!!!!!!!!!!!!!
 
