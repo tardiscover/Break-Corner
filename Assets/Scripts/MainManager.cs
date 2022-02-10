@@ -161,6 +161,7 @@ public class MainManager : MonoBehaviour
         //Add to the right paddle, set on top, and constrain to paddle's direction
         ball.transform.SetParent(rightPaddle.transform);    
         ball.transform.SetPositionAndRotation(rightPaddle.position + ballOffset, ball.rotation);
+        ball.gameObject.GetComponent<Ball>().frameWithin = FrameWithin.Right;
         ball.GetComponent<Ball>().ConstrainZTo(0.0f);
 
         ball.gameObject.SetActive(true);
