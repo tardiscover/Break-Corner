@@ -26,8 +26,6 @@ public class Ball : MonoBehaviour
     private float minVelocity = 1.0f;
     private float maxVelocity = 3.0f;
 
-    private MainManager mainManager;
-
     public AudioClip paddleSound;
     public AudioClip wallSound;
     public AudioClip popSound;
@@ -44,7 +42,6 @@ public class Ball : MonoBehaviour
         //This locks the RigidBody so that it does not move or rotate in the Z axis.
         ConstrainZTo(0.0f);
 
-        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
         ballAudioSource = gameObject.GetComponent<AudioSource>();
     }
 
@@ -105,7 +102,7 @@ public class Ball : MonoBehaviour
         m_Rigidbody.constraints = RigidbodyConstraints.None;
     }
 
-    private void ConstrainXTo(float value)
+    public void ConstrainXTo(float value)
     {
         //This ensures X is value passsed and locks the RigidBody so that it does not move on the X axis.
         //(And allows movement on other axes.)
@@ -116,7 +113,7 @@ public class Ball : MonoBehaviour
         m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
     }
 
-    private void ConstrainZTo(float value)
+    public void ConstrainZTo(float value)
     {
         //This ensures Z is value passed and locks the RigidBody so that it does not move on the Z axis.
         //(And allows movement on other axes.)
@@ -154,13 +151,13 @@ public class Ball : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Paddle"))
         {
-            if (mainManager.bricksLeft <= 0)
+            if (MainManager.Instance.bricksLeft <= 0)
             {
-                if (mainManager.rowsOfBricks < mainManager.maxRowsOfBricks)
+                if (MainManager.Instance.rowsOfBricks < MainManager.Instance.maxRowsOfBricks)
                 {
-                    mainManager.rowsOfBricks++;
+                    MainManager.Instance.rowsOfBricks++;
                 }
-                mainManager.InitBricks();
+                MainManager.Instance.InitBricks();
                 ballAudioSource.PlayOneShot(clearAllSound, 1.0f);
             }
             else

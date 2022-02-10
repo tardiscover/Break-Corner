@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MainManager : MonoBehaviour
 {
+    public static MainManager Instance { get; private set; }
+
     public Brick brickPrefab;
     public Brick slidingBrickPrefab;
     public int rowsOfBricks;
@@ -14,6 +17,8 @@ public class MainManager : MonoBehaviour
     public int bricksLeft = 0;
 
     public Rigidbody ball;
+    public Rigidbody leftPaddle;
+    public Rigidbody rightPaddle;
 
     public Text scoreText;
     public Text bestScoreText;
@@ -28,14 +33,53 @@ public class MainManager : MonoBehaviour
     public AudioClip gameOverSound;
     private AudioSource mainAudioSource;
 
-    // Start is called before the first frame update
+    public InputActionAsset primaryActions;
+    InputActionMap gameplayActionMap;
+    InputAction restartInputAction;
+
+    private Vector3 ballOffset = new Vector3(0f, 0.15f, 0f);
+
+
+    private void InitializeInputs()
+    {
+        gameplayActionMap = primaryActions.FindActionMap("Gameplay");
+        restartInputAction = gameplayActionMap.FindAction("Restart");
+        restartInputAction.performed += context => HandleRestart();
+    }
+
+    private void Awake()
+    {
+        // start of new code
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
+        Instance = this;
+        //!!!!!!!!!!!!!!!!!!!!!DontDestroyOnLoad(gameObject);
+
+        InitializeInputs();
+    }
+
     void Start()
     {
         rowsOfBricks = 1;  //First time bricks are initialized, there is 1 row.  This will increase each time they are all eliminated.
 
         mainAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
-        UpdateBestScoreText();
-        InitBricks();
+
+        ResetScene();
+    }
+
+    private void OnEnable()
+    {
+        Instance.restartInputAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        Instance.restartInputAction.Disable();
     }
 
     private void CreateBrickWall(int numRows, int numCols, Transform parent)
@@ -74,41 +118,84 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void InitBricks()
+    void DestroyChildren(GameObject gameObject)
     {
-        bricksLeft = 0;
-
-        // ABSTRACTION
-        CreateBrickWall(rowsOfBricks, bricksPerRow, GameObject.Find("RightBrickWall").transform);
-
-        CreateBrickWall(rowsOfBricks, bricksPerRow, GameObject.Find("LeftBrickWall").transform);
+        foreach (Transform child in gameObject.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
     }
 
-    private void Update()
+    public void InitBricks()
+    {
+ 
+        GameObject rightBrickWall = GameObject.Find("RightBrickWall");
+        GameObject leftBrickWall = GameObject.Find("LeftBrickWall");
+
+        DestroyChildren(rightBrickWall);
+        DestroyChildren(leftBrickWall);
+        bricksLeft = 0; //Reinitialize before creating more bricks
+
+        // ABSTRACTION
+        CreateBrickWall(rowsOfBricks, bricksPerRow, rightBrickWall.transform);
+        CreateBrickWall(rowsOfBricks, bricksPerRow, leftBrickWall.transform);
+    }
+
+    void ThrowBall()    //!!!!Move to Ball script?
+    {
+        float randomDirection = Random.Range(-1.0f, 1.0f);
+        Vector3 forceDir = new Vector3(randomDirection, 1, 0);
+        forceDir.Normalize();
+
+        ball.transform.SetParent(null);
+        ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+    }
+
+    void HandleRestart()
     {
         if (!m_Started)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartText.SetActive(false);
+            StartText.SetActive(false);
 
-                m_Started = true;
-                float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new Vector3(randomDirection, 1, 0);
-                forceDir.Normalize();
-
-                ball.transform.SetParent(null);
-                ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
-            }
+            m_Started = true;
+            ThrowBall();
         }
         else if (m_GameOver)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            ResetScene();
         }
+        //else ignore
     }
+
+    void ResetBall()
+    {
+        ball.velocity = Vector3.zero;
+
+        //Add to the right paddle, set on top, and constrain to paddle's direction
+        ball.transform.SetParent(rightPaddle.transform);    
+        ball.transform.SetPositionAndRotation(rightPaddle.position + ballOffset, ball.rotation);
+        ball.GetComponent<Ball>().ConstrainZTo(0.0f);
+
+        ball.gameObject.SetActive(true);
+    }
+
+    void ResetScene()
+    {
+        //!!!!!
+        m_Started = false;
+        m_GameOver = false;
+
+        StartText.SetActive(true);
+        GameOverText.SetActive(false);
+        UpdateBestScoreText();
+        Instance.InitBricks();  //!!!
+        ResetBall();
+    }
+
+    //private void Update()
+    //{
+
+    //}
 
     void AddPoint(int point)
     {

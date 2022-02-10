@@ -37,11 +37,9 @@ public class Brick : MonoBehaviour
         }
     }
 
-    protected MainManager mainManager;
-
     protected virtual void Start()
     {
-        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+
     }
 
     protected virtual void OnCollisionEnter(Collision other)
@@ -49,7 +47,7 @@ public class Brick : MonoBehaviour
         if (other.gameObject.CompareTag("Ball"))
         {
             onDestroyed.Invoke(PointValue);
-            mainManager.bricksLeft--;
+            MainManager.Instance.bricksLeft--;
 
             //slight delay to be sure the ball have time to bounce
             Destroy(gameObject, 0.2f);

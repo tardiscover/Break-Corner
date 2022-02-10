@@ -1,0 +1,34 @@
+{
+    "name": "PrimaryInputActions",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "e88291d2-c697-484b-af5c-af1b6ae0b12b",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "c3923206-2360-411e-b732-8a34e1c4c4dd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d46a19fb-fa9c-4a4a-98c3-ce27428d5e49",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
