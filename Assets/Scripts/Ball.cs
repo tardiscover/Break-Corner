@@ -26,6 +26,8 @@ public class Ball : MonoBehaviour
     private float minVelocity = 1.0f;
     private float maxVelocity = 3.0f;
 
+    private MainManager mainManager;
+
     public AudioClip paddleSound;
     public AudioClip wallSound;
     public AudioClip popSound;
@@ -38,6 +40,7 @@ public class Ball : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
 
         //This locks the RigidBody so that it does not move or rotate in the Z axis.
         ConstrainZTo(0.0f);
@@ -151,13 +154,13 @@ public class Ball : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Paddle"))
         {
-            if (MainManager.Instance.bricksLeft <= 0)
+            if (mainManager.bricksLeft <= 0)
             {
-                if (MainManager.Instance.rowsOfBricks < MainManager.Instance.maxRowsOfBricks)
+                if (mainManager.rowsOfBricks < mainManager.maxRowsOfBricks)
                 {
-                    MainManager.Instance.rowsOfBricks++;
+                    mainManager.rowsOfBricks++;
                 }
-                MainManager.Instance.InitBricks();
+                mainManager.InitBricks();
                 ballAudioSource.PlayOneShot(clearAllSound, 1.0f);
             }
             else

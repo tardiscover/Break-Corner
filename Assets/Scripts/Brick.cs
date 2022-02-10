@@ -8,6 +8,8 @@ public class Brick : MonoBehaviour
 {
     public UnityEvent<int> onDestroyed;
 
+    private MainManager mainManager;
+
     //The value the brick is worth if hit by the ball.  Color is changed to incate value.
     private int m_PointValue;
     public int PointValue   // ENCAPSULATION
@@ -39,7 +41,7 @@ public class Brick : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
     }
 
     protected virtual void OnCollisionEnter(Collision other)
@@ -47,7 +49,7 @@ public class Brick : MonoBehaviour
         if (other.gameObject.CompareTag("Ball"))
         {
             onDestroyed.Invoke(PointValue);
-            MainManager.Instance.bricksLeft--;
+            mainManager.bricksLeft--;
 
             //slight delay to be sure the ball have time to bounce
             Destroy(gameObject, 0.2f);

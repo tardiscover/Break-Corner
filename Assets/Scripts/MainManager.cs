@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 
 public class MainManager : MonoBehaviour
 {
-    public static MainManager Instance { get; private set; }
-
     public Brick brickPrefab;
     public Brick slidingBrickPrefab;
     public int rowsOfBricks;
@@ -49,17 +47,6 @@ public class MainManager : MonoBehaviour
 
     private void Awake()
     {
-        // start of new code
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        // end of new code
-
-        Instance = this;
-        //!!!!!!!!!!!!!!!!!!!!!DontDestroyOnLoad(gameObject);
-
         InitializeInputs();
     }
 
@@ -74,12 +61,12 @@ public class MainManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Instance.restartInputAction.Enable();
+        restartInputAction.Enable();
     }
 
     private void OnDisable()
     {
-        Instance.restartInputAction.Disable();
+        restartInputAction.Disable();
     }
 
     private void CreateBrickWall(int numRows, int numCols, Transform parent)
@@ -188,7 +175,7 @@ public class MainManager : MonoBehaviour
         StartText.SetActive(true);
         GameOverText.SetActive(false);
         UpdateBestScoreText();
-        Instance.InitBricks();  //!!!
+        InitBricks();
         ResetBall();
     }
 
