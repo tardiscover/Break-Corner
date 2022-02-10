@@ -9,7 +9,13 @@ public class Paddle : MonoBehaviour
     public float MinPosition = 0.3f;
     public float MaxPosition = 4.5f;
 
-    // Update is called once per frame
+    protected Vector3 startingPosition;
+
+    protected void Awake()
+    {
+        startingPosition = transform.position;
+    }
+
     void Update()
     {
         Move();
@@ -33,5 +39,10 @@ public class Paddle : MonoBehaviour
 
             transform.position = pos;
         }
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = startingPosition;
     }
 }

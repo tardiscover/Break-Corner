@@ -154,6 +154,12 @@ public class MainManager : MonoBehaviour
         //else ignore
     }
 
+    void ResetPaddles()
+    {
+        leftPaddle.gameObject.GetComponent<LeftPaddle>().ResetPosition();
+        rightPaddle.gameObject.GetComponent<Paddle>().ResetPosition();
+    }
+
     void ResetBall()
     {
         ball.velocity = Vector3.zero;
@@ -178,6 +184,7 @@ public class MainManager : MonoBehaviour
         UpdateBestScoreText();
         InitBricks();
         ResetBall();
+        ResetPaddles();
     }
 
     //private void Update()
