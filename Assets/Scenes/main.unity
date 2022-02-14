@@ -311,6 +311,8 @@ GameObject:
   - component: {fileID: 97436042}
   - component: {fileID: 97436046}
   - component: {fileID: 97436047}
+  - component: {fileID: 97436049}
+  - component: {fileID: 97436048}
   m_Layer: 0
   m_Name: RightPaddle
   m_TagString: Paddle
@@ -417,7 +419,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97436041}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1c141baad4ddf14a98c290342342cf6, type: 3}
   m_Name: 
@@ -425,6 +427,52 @@ MonoBehaviour:
   Speed: 5
   MinPosition: 0.3
   MaxPosition: 4.5
+--- !u!114 &97436048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97436041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe4440d2e6a2054ca10126ffaf4c4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameWithin: 1
+  speed: 5
+  minPosition: 0.3
+  maxPosition: 4.5
+--- !u!114 &97436049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97436041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 782c763e1517e8142a4dd0b4e5207e11, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &125738653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,6 +3302,8 @@ GameObject:
   - component: {fileID: 2080363955}
   - component: {fileID: 2080363954}
   - component: {fileID: 2080363953}
+  - component: {fileID: 2080363959}
+  - component: {fileID: 2080363960}
   m_Layer: 0
   m_Name: LeftPaddle
   m_TagString: Paddle
@@ -3268,7 +3318,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080363952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c9b5f3f2a82554fa5ec788baace903, type: 3}
   m_Name: 
@@ -3368,6 +3418,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &2080363959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080363952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe4440d2e6a2054ca10126ffaf4c4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameWithin: 0
+  speed: 5
+  minPosition: 0.3
+  maxPosition: 4.5
+--- !u!114 &2080363960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080363952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ade5ac72f2484924390b9ad7217e9364, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &2137539494
 GameObject:
   m_ObjectHideFlags: 0
