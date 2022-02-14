@@ -156,8 +156,7 @@ public class MainManager : MonoBehaviour
 
     void ResetPaddles()
     {
-        leftPaddle.gameObject.GetComponent<LeftPaddle>().ResetPosition();
-        rightPaddle.gameObject.GetComponent<Paddle>().ResetPosition();
+        rightPaddle.gameObject.GetComponent<PlayerController>().ResetPosition();
     }
 
     void ResetBall()

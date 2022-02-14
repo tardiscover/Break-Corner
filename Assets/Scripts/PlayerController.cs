@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     //private Rigidbody rb;
     private float movementX;    //X based on input device, not screen
     private float movementY;    //Y based on input device, not screen
-    public FrameWithin frameWithin;
     public float speed = 2.0f;
     public float minPosition = 0.3f;
     public float maxPosition = 4.5f;
@@ -36,7 +35,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    public void Move()
+    private void Move()
     {
         if (movementX != 0)
         {
