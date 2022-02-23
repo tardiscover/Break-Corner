@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //private Rigidbody rb;
-    private float movementX;    //X based on input device, not screen
-    private float movementY;    //Y based on input device, not screen
+    private float movementRightPaddle;    //X based on input device, not screen
+    private float movementLeftPaddle;    //Y based on input device, not screen
     public float speed = 2.0f;
     public float minPosition = 0.3f;
     public float maxPosition = 4.5f;
@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
 
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        movementRightPaddle = movementVector.x;
+        movementLeftPaddle = movementVector.y;
     }
 
     private void OnMoveLeftStick(InputValue movementValue)
@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         //Figure out where the joystick is when projected along the "/" diagonal.
-        movementY = Vector2.Dot(movementVector, slashVector);
+        movementLeftPaddle = Vector2.Dot(movementVector, slashVector);
 
-        Debug.Log("movementVector: " + movementVector.ToString() + ", slashVector: " + slashVector.ToString() + ", movementY: " + movementY);   //!!!!!!!!!!!!!!!
+        Debug.Log("movementVector: " + movementVector.ToString() + ", slashVector: " + slashVector.ToString() + ", movementLeftPaddle: " + movementLeftPaddle);   //!!!!!!!!!!!!!!!
     }
 
     private void OnMoveRightStick(InputValue movementValue)
@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         //Figure out where the joystick is when projected along the "\" diagonal.
-        movementX = Vector2.Dot(movementVector, backslashVector);
+        movementRightPaddle = Vector2.Dot(movementVector, backslashVector);
 
-        Debug.Log("movementVector: " + movementVector.ToString() + ", backslashVector: " + backslashVector.ToString() + ", movementX: " + movementX);   //!!!!!!!!!!!!!!!
+        Debug.Log("movementVector: " + movementVector.ToString() + ", backslashVector: " + backslashVector.ToString() + ", movementRightPaddle: " + movementRightPaddle);   //!!!!!!!!!!!!!!!
     }
 
     void FixedUpdate()
@@ -61,12 +61,12 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        if (movementX != 0)
+        if (movementRightPaddle != 0)
         {
             //Debug.Log("right move: " + input);
 
             Vector3 pos = transform.position;
-            pos.x += movementX * speed * Time.deltaTime;
+            pos.x += movementRightPaddle * speed * Time.deltaTime;
 
             if (pos.x > maxPosition)
                 pos.x = maxPosition;
@@ -76,12 +76,12 @@ public class PlayerController : MonoBehaviour
             transform.position = pos;
         }
 
-        if (movementY != 0)
+        if (movementLeftPaddle != 0)
         {
             //Debug.Log("left move: " + input);
 
             Vector3 pos = leftPaddleTransform.position;
-            pos.z += movementY * speed * Time.deltaTime;
+            pos.z += movementLeftPaddle * speed * Time.deltaTime;
             //Note: signs are reversed since Z axis in opposite direction of game's conceptional z axis.
             if (pos.z < -maxPosition)
                 pos.z = -maxPosition;

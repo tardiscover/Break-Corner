@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 782c763e1517e8142a4dd0b4e5207e11, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: fadd0445c25e3e742890b0540f0f54ce, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -453,7 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe4440d2e6a2054ca10126ffaf4c4b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameWithin: 1
   speed: 5
   minPosition: 0.3
   maxPosition: 4.5
@@ -470,7 +469,7 @@ GameObject:
   - component: {fileID: 125738656}
   - component: {fileID: 125738655}
   m_Layer: 5
-  m_Name: D Text
+  m_Name: RP Right Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +514,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'D\uf061
+  m_text: '\uf061
 
 
 '
@@ -2480,7 +2479,7 @@ GameObject:
   - component: {fileID: 1573893062}
   - component: {fileID: 1573893061}
   m_Layer: 5
-  m_Name: S Text
+  m_Name: LP Left Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2525,7 +2524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: S\uf063
+  m_text: A
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2709,7 +2708,7 @@ GameObject:
   - component: {fileID: 1641395083}
   - component: {fileID: 1641395082}
   m_Layer: 5
-  m_Name: W Text
+  m_Name: LP Right Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2754,7 +2753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf062W
+  m_text: D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3072,7 +3071,7 @@ GameObject:
   - component: {fileID: 1797977419}
   - component: {fileID: 1797977418}
   m_Layer: 5
-  m_Name: A Text
+  m_Name: RP Left Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3117,7 +3116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: \uf060A
+  m_text: \uf060
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

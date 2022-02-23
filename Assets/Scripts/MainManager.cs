@@ -40,7 +40,7 @@ public class MainManager : MonoBehaviour
 
     private void InitializeInputs()
     {
-        gameplayActionMap = primaryActions.FindActionMap("Gameplay");
+        gameplayActionMap = primaryActions.FindActionMap("UI");
         restartInputAction = gameplayActionMap.FindAction("Restart");
         restartInputAction.performed += context => HandleRestart();
     }
