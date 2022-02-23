@@ -1,5 +1,5 @@
 {
-    "name": "BreakCorner",
+    "name": "BreakCornerInputActions",
     "maps": [
         {
             "name": "Player",
@@ -225,7 +225,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "MoveLeftStick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -236,7 +236,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "MoveRightStick",
                     "isComposite": false,
                     "isPartOfComposite": false
