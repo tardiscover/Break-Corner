@@ -32,7 +32,7 @@ public class MainManager : MonoBehaviour
     private AudioSource mainAudioSource;
 
     public InputActionAsset primaryActions;
-    InputActionMap gameplayActionMap;
+    InputActionMap uiActionMap;
     InputAction restartInputAction;
 
     private Vector3 ballOffset = new Vector3(0f, 0.15f, 0f);
@@ -40,8 +40,8 @@ public class MainManager : MonoBehaviour
 
     private void InitializeInputs()
     {
-        gameplayActionMap = primaryActions.FindActionMap("UI");
-        restartInputAction = gameplayActionMap.FindAction("Restart");
+        uiActionMap = primaryActions.FindActionMap("UI");
+        restartInputAction = uiActionMap.FindAction("Restart");
         restartInputAction.performed += context => HandleRestart();
     }
 

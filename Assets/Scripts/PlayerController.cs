@@ -16,9 +16,6 @@ public class PlayerController : MonoBehaviour
     protected Vector3 startingPosition;
     protected Vector3 leftPaddleStartingPosition;
 
-    //Below are used to figure out what the joystick position is relative to the "/" and "\" diagonals.
-    private Vector2 slashVector = new Vector2(1, 1).normalized;
-    private Vector2 backslashVector = new Vector2(1, -1).normalized;
 
     protected void Awake()
     {
@@ -26,32 +23,14 @@ public class PlayerController : MonoBehaviour
         leftPaddleStartingPosition = leftPaddleTransform.position;
     }
 
-    private void OnMove(InputValue movementValue)
+    private void OnMoveLeftPaddle(InputValue movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        movementRightPaddle = movementVector.x;
-        movementLeftPaddle = movementVector.y;
+        movementLeftPaddle = movementValue.Get<float>();
     }
 
-    private void OnMoveLeftStick(InputValue movementValue)
+    private void OnMoveRightPaddle(InputValue movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        //Figure out where the joystick is when projected along the "/" diagonal.
-        movementLeftPaddle = Vector2.Dot(movementVector, slashVector);
-
-        Debug.Log("movementVector: " + movementVector.ToString() + ", slashVector: " + slashVector.ToString() + ", movementLeftPaddle: " + movementLeftPaddle);   //!!!!!!!!!!!!!!!
-    }
-
-    private void OnMoveRightStick(InputValue movementValue)
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        //Figure out where the joystick is when projected along the "\" diagonal.
-        movementRightPaddle = Vector2.Dot(movementVector, backslashVector);
-
-        Debug.Log("movementVector: " + movementVector.ToString() + ", backslashVector: " + backslashVector.ToString() + ", movementRightPaddle: " + movementRightPaddle);   //!!!!!!!!!!!!!!!
+        movementRightPaddle = movementValue.Get<float>();
     }
 
     void FixedUpdate()
