@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     protected Vector3 startingPosition;
     protected Vector3 leftPaddleStartingPosition;
 
+    private float leftPaddleLeftButtonIsPressed = 0.0f;
+    private float leftPaddleRightButtonIsPressed = 0.0f;
+    private float rightPaddleLeftButtonIsPressed = 0.0f;
+    private float rightPaddleRightButtonIsPressed = 0.0f;
 
     protected void Awake()
     {
@@ -31,6 +35,68 @@ public class PlayerController : MonoBehaviour
     private void OnMoveRightPaddle(InputValue movementValue)
     {
         movementRightPaddle = movementValue.Get<float>();
+    }
+
+    // Mouse/Touch events for Left Paddle
+
+    public void OnLeftPaddleLeftButtonDown()
+    {
+        leftPaddleLeftButtonIsPressed = -1.0f;
+        SetMovementLeftPaddle();
+    }
+
+    public void OnLeftPaddleLeftButtonUp()
+    {
+        leftPaddleLeftButtonIsPressed = 0.0f;
+        SetMovementLeftPaddle();
+    }
+
+    public void OnLeftPaddleRightButtonDown()
+    {
+        leftPaddleRightButtonIsPressed = 1.0f;
+        SetMovementLeftPaddle();
+    }
+
+    public void OnLeftPaddleRightButtonUp()
+    {
+        leftPaddleRightButtonIsPressed = 0.0f;
+        SetMovementLeftPaddle();
+    }
+
+    private void SetMovementLeftPaddle()
+    {
+        movementLeftPaddle = leftPaddleLeftButtonIsPressed + leftPaddleRightButtonIsPressed;
+    }
+
+    // Mouse/Touch events for Right Paddle
+
+    public void OnRightPaddleLeftButtonDown()
+    {
+        rightPaddleLeftButtonIsPressed = -1.0f;
+        SetMovementRightPaddle();
+    }
+
+    public void OnRightPaddleLeftButtonUp()
+    {
+        rightPaddleLeftButtonIsPressed = 0.0f;
+        SetMovementRightPaddle();
+    }
+
+    public void OnRightPaddleRightButtonDown()
+    {
+        rightPaddleRightButtonIsPressed = 1.0f;
+        SetMovementRightPaddle();
+    }
+
+    public void OnRightPaddleRightButtonUp()
+    {
+        rightPaddleRightButtonIsPressed = 0.0f;
+        SetMovementRightPaddle();
+    }
+
+    private void SetMovementRightPaddle()
+    {
+        movementRightPaddle = rightPaddleLeftButtonIsPressed + rightPaddleRightButtonIsPressed;
     }
 
     void FixedUpdate()
