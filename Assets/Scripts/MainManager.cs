@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class MainManager : MonoBehaviour
 {
@@ -37,12 +38,19 @@ public class MainManager : MonoBehaviour
 
     private Vector3 ballOffset = new Vector3(0f, 0.15f, 0f);
 
-
+    //Initialize the Inputs, to be called in Awake().
     private void InitializeInputs()
     {
         uiActionMap = primaryActions.FindActionMap("UI");
         restartInputAction = uiActionMap.FindAction("Restart");
-        restartInputAction.performed += context => HandleRestart();
+        restartInputAction.performed += HandleRestart;
+    }
+
+    //Remove the Inputs when script is destoyed so no orphaned reference (because InputAction not destroyed), 
+    //to be called in OnDestroy().
+    private void RemoveInputs()
+    {
+        restartInputAction.performed -= HandleRestart;
     }
 
     private void Awake()
@@ -67,6 +75,11 @@ public class MainManager : MonoBehaviour
     private void OnDisable()
     {
         restartInputAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        RemoveInputs();
     }
 
     private void CreateBrickWall(int numRows, int numCols, Transform parent)
@@ -138,7 +151,7 @@ public class MainManager : MonoBehaviour
         ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
     }
 
-    void HandleRestart()
+    void HandleRestart(CallbackContext context)
     {
         if (!m_Started)
         {
