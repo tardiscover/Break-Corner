@@ -190,9 +190,11 @@ public class MainManager : MonoBehaviour
         //!!!!!
         m_Started = false;
         m_GameOver = false;
+        m_Points = 0;
 
         StartText.SetActive(true);
         GameOverText.SetActive(false);
+        UpdateScoreText();
         UpdateBestScoreText();
         InitBricks();
         ResetBall();
@@ -207,7 +209,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        scoreText.text = $"Score : {m_Points}";
+        UpdateScoreText();
     }
 
     // ABSTRACTION
@@ -218,6 +220,11 @@ public class MainManager : MonoBehaviour
         UpdateBestScore();
         mainAudioSource.PlayOneShot(gameOverSound, 1.0f);
         SaveData.SaveGameData();
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = $"Score : {m_Points}";
     }
 
     void UpdateBestScoreText()
