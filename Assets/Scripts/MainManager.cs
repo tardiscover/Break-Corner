@@ -60,8 +60,6 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
-        rowsOfBricks = 1;  //First time bricks are initialized, there is 1 row.  This will increase each time they are all eliminated.
-
         mainAudioSource = GameObject.Find("Main Camera").GetComponent<AudioSource>();
 
         ResetScene();
@@ -191,6 +189,8 @@ public class MainManager : MonoBehaviour
         m_Started = false;
         m_GameOver = false;
         m_Points = 0;
+
+        rowsOfBricks = 1;  //First time bricks are initialized, there is 1 row.  This will increase each time they are all eliminated.
 
         StartText.SetActive(true);
         GameOverText.SetActive(false);
